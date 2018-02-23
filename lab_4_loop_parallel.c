@@ -1,5 +1,6 @@
 #include <time.h>
 #include <math.h>
+#include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -43,8 +44,10 @@ double ** multiply_matrix(double ** matA, double ** matB, int dim){
     clock_t t;
     t = clock();
     
+    #pragma omp parallel for 
     for (int i = 0; i < dim; i++){
         for (int j = 0; j < dim; j++){
+
              for (int k= 0; k < dim ; k++){
                 matrix[i][j]  += matA[i][k]*matB[k][j];
             }   
